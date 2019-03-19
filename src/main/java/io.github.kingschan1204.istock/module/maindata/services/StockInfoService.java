@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author chenguoxiang
  * @create 2018-11-02 14:17
  **/
@@ -37,6 +36,7 @@ public class StockInfoService {
 
     /**
      * 查公司详细信息
+     *
      * @param code
      * @return
      */
@@ -58,16 +58,16 @@ public class StockInfoService {
         //正式查询
         AggregationResults<BasicDBObject> results = mongoTemplate.aggregate(aggregation, "stock", BasicDBObject.class);
         List<BasicDBObject> list = results.getMappedResults();
-        JSONArray jsonArray=JSONArray.parseArray(JSON.toJSONString(list));
-        JSONObject data =jsonArray.getJSONObject(0);
+        JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(list));
+        JSONObject data = jsonArray.getJSONObject(0);
         //查股东
         DBObject dbObject = new BasicDBObject();
         DBObject fieldObject = new BasicDBObject();
         fieldObject.put("_id", false);
         fieldObject.put("code", false);
-        Query query = new BasicQuery(dbObject,fieldObject);
+        Query query = new BasicQuery(dbObject, fieldObject);
         query.addCriteria(Criteria.where("code").is(code));
-        List<StockTopHolders> holders=  mongoTemplate.find(query, StockTopHolders.class);
+        List<StockTopHolders> holders = mongoTemplate.find(query, StockTopHolders.class);
         /*Map<String,List<StockTopHolders>> map =holders.stream().collect(Collectors.groupingBy(StockTopHolders::getHolderName));
         holders=new ArrayList<StockTopHolders>();
         map.forEach((key, value) ->{
@@ -75,12 +75,11 @@ public class StockInfoService {
         });
 
         System.out.println(map);*/
-        JSONArray jsonHolders=JSONArray.parseArray(JSON.toJSONString(holders));
-        data.put("holders",jsonHolders);
+        JSONArray jsonHolders = JSONArray.parseArray(JSON.toJSONString(holders));
+        data.put("holders", jsonHolders);
         return data;
 
     }
-
 
 
 }

@@ -8,30 +8,30 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author chenguoxiang
  * @create 2018-10-31 16:42
  **/
 @Service
 public class StockCompanyService {
 
-        Logger log = LoggerFactory.getLogger(StockCompanyService.class);
-        @Autowired
-        private TushareSpider tushareSpider;
-        @Autowired
-        private MongoTemplate mongoTemplate;
+    Logger log = LoggerFactory.getLogger(StockCompanyService.class);
+    @Autowired
+    private TushareSpider tushareSpider;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     /**
      * 代码列表刷新
      */
-    public void refreshStockCompany(){
+    public void refreshStockCompany() {
         List<StockCompany> list = new ArrayList<StockCompany>();
-        JSONArray rows_sh =tushareSpider.getStockShCompany();
-        JSONArray rows_sz =tushareSpider.getStockSZCompany();
+        JSONArray rows_sh = tushareSpider.getStockShCompany();
+        JSONArray rows_sz = tushareSpider.getStockSZCompany();
         for (int i = 0; i < rows_sh.size(); i++) {
             list.add(new StockCompany(rows_sh.getJSONArray(i)));
         }

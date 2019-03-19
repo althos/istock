@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * 代码前几名持有人
+ *
  * @author chenguoxiang
  * @create 2018-11-01 10:55
  **/
@@ -30,27 +31,28 @@ public class StockTopHoldersService {
 
     /**
      * 刷新持有人
+     *
      * @param code
      */
-    public void refreshTopHolders(String code){
+    public void refreshTopHolders(String code) {
         List<StockTopHolders> list = new ArrayList<StockTopHolders>();
-        JSONArray rows =tushareSpider.getStockTopHolders(code);
-        String frist=null;
+        JSONArray rows = tushareSpider.getStockTopHolders(code);
+        String frist = null;
         for (int i = 0; i < rows.size(); i++) {
-            if(null==frist){
-                frist=rows.getJSONArray(i).getString(1);
+            if (null == frist) {
+                frist = rows.getJSONArray(i).getString(1);
             }
-            if(frist.equals(rows.getJSONArray(i).getString(1))){
+            if (frist.equals(rows.getJSONArray(i).getString(1))) {
                 list.add(new StockTopHolders(rows.getJSONArray(i)));
-            }else{
+            } else {
                 break;
             }
         }
-        String query_code=code.replaceAll("\\D+","");
+        String query_code = code.replaceAll("\\D+", "");
         //先删除再新增
-        WriteResult wr= mongoTemplate.remove(new Query(Criteria.where("code").is(query_code)),StockTopHolders.class);
+        WriteResult wr = mongoTemplate.remove(new Query(Criteria.where("code").is(query_code)), StockTopHolders.class);
         mongoTemplate.insertAll(list);
-        log.info("top10 holders :remove {} ,insert {} ",wr.getN(),list.size());
+        log.info("top10 holders :remove {} ,insert {} ", wr.getN(), list.size());
     }
 
 }

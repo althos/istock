@@ -43,13 +43,7 @@ public class StockTopHoldersTask implements Job{
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        /*try {
-            if (!StockSpider.isWorkDay(StockDateUtil.getCurrentDateNumber())) {
-                return;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+
         Long start = System.currentTimeMillis();
         Integer dateNumber = StockDateUtil.getCurrentDateNumber();
         Criteria cr = new Criteria();

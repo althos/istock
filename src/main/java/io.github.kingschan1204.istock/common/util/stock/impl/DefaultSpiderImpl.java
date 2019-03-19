@@ -219,7 +219,7 @@ public class DefaultSpiderImpl implements StockSpider {
         String referrer=String.format("http://basic.10jqka.com.cn/%s/finance.html",code);
         if (!new File(path).exists()) {
             //下载
-            path= FileCommonOperactionTool.downloadFile(url, referrer,"./data/", code+".xls");
+            path= FileCommonOperactionTool.downloadFile(url, referrer,"F:\\stockData\\", code+".xls");
         }else{
             log.info("文件存在，直接读取：{}",path);
         }

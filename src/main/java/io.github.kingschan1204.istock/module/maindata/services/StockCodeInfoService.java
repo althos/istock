@@ -10,11 +10,13 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 代码信息服务类
+ *
  * @author chenguoxiang
  * @create 2018-10-30 15:22
  **/
@@ -30,9 +32,9 @@ public class StockCodeInfoService {
     /**
      * 代码列表刷新
      */
-    public void refreshCode(){
+    public void refreshCode() {
         List<StockCodeInfo> list = new ArrayList<StockCodeInfo>();
-        JSONArray rows =tushareSpider.getStockCodeList();
+        JSONArray rows = tushareSpider.getStockCodeList();
         for (int i = 0; i < rows.size(); i++) {
             list.add(new StockCodeInfo(rows.getJSONArray(i)));
         }
@@ -53,6 +55,7 @@ public class StockCodeInfoService {
 
     /**
      * 返回沪市代码
+     *
      * @return
      */
     public List<StockCodeInfo> getSHStockCodes() {
@@ -62,6 +65,7 @@ public class StockCodeInfoService {
 
     /**
      * 返回深市代码
+     *
      * @return
      */
     public List<StockCodeInfo> getSZStockCodes() {

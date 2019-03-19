@@ -45,21 +45,24 @@ public class InitQuartzTaskRunner implements ApplicationRunner, Ordered {
                 "stockHoldersTask-trigger",
                 "stockHoldersTask-trigger-group",
                 StockTopHoldersTask.class,
-                "0/30 * * * * ?");
+                "0 0 0 * * ?"
+                //"0/30 * * * * ?"
+        );
 
         quartzManager.addJob("stockCodeTask",
                 "stockCodeTask-group",
                 "stockCodeTask-trigger",
                 "stockCodeTask-trigger-group",
                 StockCodeTask.class,
-                "0 0 0 * * ?");
+                "0 0 0 * * ?"
+        );
 
         quartzManager.addJob("stockDividendTask",
                 "stockDividendTask-group",
                 "stockDividendTask-trigger",
                 "stockDividendTask-trigger-group",
                 StockDividendTask.class,
-                "6 * * * * ?");
+                "8 * * * * ?");
 
 
         quartzManager.addJob("hisRepoartTask",
@@ -67,7 +70,7 @@ public class InitQuartzTaskRunner implements ApplicationRunner, Ordered {
                 "hisRepoartTask-trigger",
                 "hisRepoartTask-trigger-group",
                 ThsHisYearReportTask.class,
-                "6 * * * * ?");
+                "8 * * * * ?");
 
 
 
