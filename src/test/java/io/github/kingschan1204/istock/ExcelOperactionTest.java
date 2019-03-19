@@ -19,7 +19,7 @@ public class ExcelOperactionTest {
      * excel 年度报表测试
      * @throws Exception
      */
-    @Test
+   /* @Test
     public  void main()throws Exception {
         List<Object[]> list = ExcelOperactionTool.readExcelData("./000568_main_year.xls");
         list.stream().forEach(lis -> {
@@ -30,5 +30,5 @@ public class ExcelOperactionTest {
             }
             System.out.println();
         });
-    }
+    }*/
 }
